@@ -122,5 +122,4 @@ class Student_list_DB private constructor():Student_list_interface {
         }
         return Data_list_student_short(list)
     }
-
 }
