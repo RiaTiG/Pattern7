@@ -4,15 +4,25 @@ import Student_short
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
+import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.layout.AnchorPane
+import javafx.stage.Modality
+import javafx.stage.Stage
+import java.awt.Window
+
+
 class View {
     private var controller: Student_list_controller? = null
+    private var controller_add: Student_add_controller?=null
     constructor(){
+        this.controller_add = Student_add_controller()
         this.controller=Student_list_controller(this)
-        println("Контроллер задан")
     }
-    //фильтрация
+
     @FXML
     private lateinit var Email_list: ComboBox<Any>
 
@@ -65,7 +75,7 @@ class View {
 
     @FXML
     public lateinit var page_text: TextField
-    // Активные кнопки
+
     @FXML
     private lateinit var button_add: Button
 
@@ -77,12 +87,11 @@ class View {
 
     @FXML
     private lateinit var button_refresh: Button
-    // Дополнительные кнопки
+
     @FXML
     private lateinit var button_clear: Button
     @FXML
     private lateinit var FIO_text: TextField
-
     @FXML
     fun initialize() {
         initiazile_filter()
@@ -90,6 +99,11 @@ class View {
         initialize_table()
         initilize_buttons()
         initialize_actions()
+    }
+    @FXML
+    fun openNewWindow() {
+        controller_add?.openNewWindow()
+        controller?.refresh_data()
     }
     fun setTableParams(cur:Int,all:Int){
         page_text.text = cur.toString()
@@ -99,8 +113,8 @@ class View {
         table.items.setAll(args)
     }
 
-     fun initilize_buttons(){
-         page_text.isDisable=true
+    fun initilize_buttons(){
+        page_text.isDisable=true
         button_change.isDisable=true
         button_delete.isDisable=true
         table.selectionModel.selectionMode = SelectionMode.MULTIPLE
@@ -120,6 +134,7 @@ class View {
             }
         }
     }
+
     fun initialize_actions(){
         button_prev.setOnAction {
             if(page_text.text.toInt()-1>=1){
@@ -147,7 +162,6 @@ class View {
             Phone_text.isDisable=true
             Email_text.isDisable=true
             Tg_text.isDisable=true
-
         }
     }
     fun initiazile_filter(){

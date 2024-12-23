@@ -13,7 +13,6 @@ class Student_list_DB private constructor():Student_list_interface {
                 "postgres",
                 "postgres"
             )
-            println("Успешное подключение к БД.")
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -88,7 +87,7 @@ class Student_list_DB private constructor():Student_list_interface {
         else
             insert+=",git=NULL"
         insert+="where id=$id;\n"
-        println(insert)
+        //println(insert)
         statement.executeUpdate(insert)
 
     }
