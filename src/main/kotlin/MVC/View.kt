@@ -114,8 +114,8 @@ class View {
         if(selected!=null){
             controller_update?.openNewWindow(selected.id)
             controller_update?.SetId(selected.id)
-            controller?.refresh_data()
         }
+        controller?.refresh_data()
     }
 
     fun setTableParams(cur:Int,all:Int){

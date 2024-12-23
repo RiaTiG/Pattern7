@@ -39,7 +39,7 @@ class Student_list_DB private constructor():Student_list_interface {
                     input+=result.getString(i)+" "
                 }
             }
-            println(input)
+            //println(input)
             return Student(input)
         }
         return null
