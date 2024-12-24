@@ -5,7 +5,7 @@ interface Student_list_interface
     fun add_student(student:Student)
     fun update_student(student: Student,id:Int,)
     fun delete_student(id:Int)
-    fun get_k_n_student_short_list(k: Int, n: Int) : Data_list_student_short
+    fun get_k_n_student_short_list(k: Int, n: Int,filters:MutableList<Pair<String,String>>) : Data_list_student_short
     fun get_count():Int
 }
 class Student_list_adapter(var path:String):Student_list_interface

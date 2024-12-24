@@ -95,6 +95,16 @@ class View {
     private lateinit var button_clear: Button
     @FXML
     private lateinit var FIO_text: TextField
+
+    public var filters = mutableListOf(
+        Pair("", ""),//ФИО
+        Pair("", "не важно"),//Гит
+        Pair("", "не важно"),//Телеграм
+        Pair("", "не важно"),//Телефон
+        Pair("", "не важно")//Почта
+    )
+
+
     @FXML
     fun initialize() {
         initiazile_filter()
@@ -155,6 +165,14 @@ class View {
         }
     }
 
+    fun refresh_filters(){
+        filters[0]=Pair(FIO_text.text,"")
+        filters[1] = Pair(Git_text.text, Git_list.value?.toString() ?: "Не важно")
+        filters[2] = Pair(Tg_text.text, Tg_list.value?.toString() ?: "Не важно")
+        filters[3] = Pair(Phone_text.text, Phone_list.value?.toString() ?: "Не важно")
+        filters[4] = Pair(Email_text.text, Email_list.value?.toString() ?: "Не важно")
+    }
+
     fun initialize_actions(){
         button_prev.setOnAction {
             if(page_text.text.toInt()-1>=1){
@@ -169,6 +187,7 @@ class View {
             controller?.refresh_data()
         }
         button_refresh.setOnAction {
+            refresh_filters()
             controller?.refresh_data()
         }
         button_clear.setOnAction {
