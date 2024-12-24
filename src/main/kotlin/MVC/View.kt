@@ -51,7 +51,7 @@ class View {
     @FXML
     private lateinit var Tg_text: TextField
 
-    //Таблица
+
     @FXML
     private lateinit var contact_table: TableColumn<Any, Any>
 
@@ -66,7 +66,7 @@ class View {
 
 
     @FXML
-    internal  lateinit var table: TableView<Student_short>
+    internal lateinit var table: TableView<Student_short>
 
     @FXML
     private lateinit var button_next: Button
@@ -91,7 +91,6 @@ class View {
 
     @FXML
     private lateinit var button_refresh: Button
-
     @FXML
     private lateinit var button_clear: Button
     @FXML
@@ -109,15 +108,15 @@ class View {
         controller_add?.openNewWindow()
         controller?.refresh_data()
     }
-
     @FXML
     fun openEditWindow() {
         val selected = table.selectionModel.selectedItem
         if(selected!=null){
+
             controller_update?.openNewWindow(selected.id)
             controller_update?.SetId(selected.id)
+            controller?.refresh_data()
         }
-        controller?.refresh_data()
     }
     @FXML
     fun deleteStudent(){
@@ -126,7 +125,6 @@ class View {
         }
         controller?.refresh_data()
     }
-
     fun setTableParams(cur:Int,all:Int){
         page_text.text = cur.toString()
         page_all.text=all.toString()
@@ -168,6 +166,9 @@ class View {
             if(page_text.text.toInt()+1<=page_all.text.toInt()){
                 controller?.curPage = controller?.curPage!! + 1
             }
+            controller?.refresh_data()
+        }
+        button_refresh.setOnAction {
             controller?.refresh_data()
         }
         button_clear.setOnAction {

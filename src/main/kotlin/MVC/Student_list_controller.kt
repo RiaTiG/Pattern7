@@ -16,7 +16,7 @@ import kotlin.math.ceil
 
 public class Student_list_controller{
 
-    // пагинация
+
     private val rowsPerPage = 15
     public var curPage=1
     public var allPages=1

@@ -43,7 +43,7 @@ public class Student_add_controller{
             val root: Parent = loader.load()
             val newStage = Stage()
             newStage.initModality(Modality.APPLICATION_MODAL)
-            newStage.title = "Новое окно"
+            newStage.title = "window1"
             newStage.scene = Scene(root)
             newStage.showAndWait()
         } catch (e: Exception) {
@@ -76,6 +76,10 @@ public class Student_add_controller{
         if(email_text_add.text!=""){
             string+="email="+email_text_add.text
         }
-        student_list.add_student(Student(string))
+        var a=Student(string)
+        if(a.firstName!=""&&a.lastName!=""&&a.surname!="")
+            student_list.add_student(a)
+        val currentStage = button_add_add.scene.window as Stage
+        currentStage.close()
     }
 }

@@ -1,3 +1,4 @@
+import Student_super.Companion.fioReg
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.File
@@ -93,12 +94,12 @@ class Student: Student_super{
         }
         else
             println("Валидация не пройдена")
-            return false
+        return false
     }
     fun set_contact(_email: String?=null,_phone: String?=null,_telegram: String?=null){
-            this.email=_email
-            this.phone=_phone
-            this.telegram=_telegram
+        this.email=_email
+        this.phone=_phone
+        this.telegram=_telegram
     }
 
     @JsonCreator
@@ -132,21 +133,27 @@ class Student: Student_super{
         val args: List<String>
         args=_info.split(" ")
         id=_id
-        lastName=args[0]
-        firstName=args[1]
-        surname=args[2]
+        if(checkFio(args[0])&&checkFio(args[1])&&checkFio(args[2])){
+            lastName=args[0]
+            firstName=args[1]
+            surname=args[2]
+        }
         for(arg in args){
             if(arg.split("=")[0]=="phone"){
-                phone=arg.split("=")[1]
+                if(checkPhone(arg.split("=")[1]))
+                    phone=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="telegram"){
-                telegram=arg.split("=")[1]
+                if(checkTg(arg.split("=")[1]))
+                    telegram=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="email"){
-                email=arg.split("=")[1]
+                if(checkEmail(arg.split("=")[1]))
+                    email=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="git"){
-                git=arg.split("=")[1]
+                if(checkGit(arg.split("=")[1]))
+                    git=arg.split("=")[1]
             }
         }
 
@@ -155,21 +162,26 @@ class Student: Student_super{
         val args: List<String>
         args=_info.split(" ")
         id=counter
-        lastName=args[0]
-        firstName=args[1]
-        surname=args[2]
+        if(checkFio(args[0])&&checkFio(args[1])&&checkFio(args[2])){
+            lastName=args[0]
+            firstName=args[1]
+            surname=args[2]}
         for(arg in args){
             if(arg.split("=")[0]=="phone"){
-                phone=arg.split("=")[1]
+                if(checkPhone(arg.split("=")[1]))
+                    phone=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="telegram"){
-                telegram=arg.split("=")[1]
+                if(checkTg(arg.split("=")[1]))
+                    telegram=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="email"){
-                email=arg.split("=")[1]
+                if(checkEmail(arg.split("=")[1]))
+                    email=arg.split("=")[1]
             }
             if(arg.split("=")[0]=="git"){
-                git=arg.split("=")[1]
+                if(checkGit(arg.split("=")[1]))
+                    git=arg.split("=")[1]
             }
         }
 
@@ -233,7 +245,7 @@ class Student: Student_super{
         return null
     }
     override fun toString():String{
-        var string=firstName+" "+lastName+" "+surname+" "
+        var string=lastName+" "+firstName+" "+surname+" "
         if(phone!=null)
             string+="phone="+phone+" "
         if(telegram!=null)

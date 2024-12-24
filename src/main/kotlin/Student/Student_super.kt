@@ -15,6 +15,7 @@ open class Student_super {
         val mailReg=Regex("""\w*\@\w*\.\w*""")
         val telegramReg=Regex("^@+[a-zA-Z0-9_]{5,64}$")
         val gitReg=Regex("^[a-zA-Z0-9]+/[a-zA-Z0-9-_]+\$")
+
         fun checkGit(value: String?):Boolean{
             if(gitReg.matches(value.toString()))
                 return true

@@ -17,6 +17,4 @@ class Student_short: Student_super {
         this.git=student.git
         this.contact=student.GetContact()
     }
-
-
 }
