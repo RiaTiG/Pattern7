@@ -28,5 +28,5 @@ class Student_list_JSON:Student_list_super(),Strategy_interface {
         file.writeText(json)
     }
 
-    
+
 }

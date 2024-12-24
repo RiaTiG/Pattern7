@@ -96,7 +96,7 @@ class Student: Student_super{
             println("Валидация не пройдена")
         return false
     }
-    fun set_contact(_email: String?=null,_phone: String?=null,_telegram: String?=null){
+    fun Set_contact(_email: String?=null,_phone: String?=null,_telegram: String?=null){
         this.email=_email
         this.phone=_phone
         this.telegram=_telegram
@@ -244,29 +244,16 @@ class Student: Student_super{
             return email
         return null
     }
-    override fun toString():String{
-        var string=lastName+" "+firstName+" "+surname+" "
-        if(phone!=null)
-            string+="phone="+phone+" "
-        if(telegram!=null)
-            string+="telegram="+telegram+" "
-        if(email!=null)
-            string+="email="+email+" "
-        if(git!=null)
-            string+="git="+git+" "
-        return string
-    }
-
-
     fun GetFullName():String{
         return lastName+" "+firstName+" "+surname
     }
-    public fun check_filters(student: Student,filters: MutableList<Pair<String, String>>):Boolean{
+    fun check_filters(student: Student,filters: MutableList<Pair<String, String>>):Boolean{
         var check=true
         if(filters[0].first!=""){
             if(student.GetFullName().contains(filters[0].first)==false)
                 check=false
         }
+
         if( filters[1].second=="Да"){
             if(student.git!=null){
                 if(filters[1].first!=""){
@@ -282,6 +269,7 @@ class Student: Student_super{
         }
         else if(filters[1].second=="Нет"&&(student.git!=null))
             check=false
+
         if( filters[2].second=="Да"){
             if(student.telegram!=null){
                 if(filters[2].first!=""){
@@ -296,6 +284,7 @@ class Student: Student_super{
         }
         else if(filters[2].second=="Нет"&&(student.telegram!=null))
             check=false
+
         if( filters[3].second=="Да"){
             if(student.phone!=null){
                 if(filters[3].first!=""){
@@ -310,6 +299,7 @@ class Student: Student_super{
         }
         else if(filters[3].second=="Нет"&&(student.phone!=null))
             check=false
+
         if( filters[4].second=="Да"){
             if(student.email!=null){
                 if(filters[4].first!=""){
@@ -324,7 +314,20 @@ class Student: Student_super{
         }
         else if(filters[4].second=="Нет"&&(student.email!=null))
             check=false
+
         return check
+    }
+    override fun toString():String{
+        var string=lastName+" "+firstName+" "+surname+" "
+        if(phone!=null)
+            string+="phone="+phone+" "
+        if(telegram!=null)
+            string+="telegram="+telegram+" "
+        if(email!=null)
+            string+="email="+email+" "
+        if(git!=null)
+            string+="git="+git+" "
+        return string
     }
 
 }

@@ -60,7 +60,7 @@
                                     <TableColumn fx:id="contact_table" prefWidth="120.0" text="Контакт" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="button_prev" layoutX="363.0" layoutY="536.0" mnemonicParsing="false" text="prev" />
+                              <Button fx:id="button_prev" layoutX="350.0" layoutY="536.0" mnemonicParsing="false" text="prev" />
                               <Button fx:id="button_next" layoutX="467.0" layoutY="536.0" mnemonicParsing="false" text="next" />
                               <TextField fx:id="page_text" alignment="CENTER" layoutX="405.0" layoutY="536.0" prefHeight="26.0" prefWidth="59.0" text="1" />
                               <Label fx:id="page_all" contentDisplay="CENTER" layoutX="500.0" layoutY="135.0" text="1" />

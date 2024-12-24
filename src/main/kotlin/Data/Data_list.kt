@@ -1,10 +1,10 @@
 open class Data_list<T>(var data:List<T>) {
     private var selected:MutableList<Int> = mutableListOf()
     fun select(index:Int){
-            if(index<=data.size) {
-                if(index>=1)
+        if(index<=data.size) {
+            if(index>=1)
                 selected.add(index)
-            }
+        }
     }
     fun get_selected(): List<Int>{
         return selected

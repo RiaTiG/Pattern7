@@ -20,6 +20,7 @@ class View {
     private var controller_add: Student_add_controller?=null
     private var controller_update: Student_update_controller?=null
     private var controller_delete: Student_delete_controller?=null
+
     constructor(){
         this.controller_add = Student_add_controller()
         this.controller=Student_list_controller(this)
@@ -91,19 +92,20 @@ class View {
 
     @FXML
     private lateinit var button_refresh: Button
+
     @FXML
     private lateinit var button_clear: Button
+
     @FXML
     private lateinit var FIO_text: TextField
 
     public var filters = mutableListOf(
-        Pair("", ""),//ФИО
-        Pair("", "не важно"),//Гит
-        Pair("", "не важно"),//Телеграм
-        Pair("", "не важно"),//Телефон
-        Pair("", "не важно")//Почта
+        Pair("", ""),
+        Pair("", "не важно"),
+        Pair("", "не важно"),
+        Pair("", "не важно"),
+        Pair("", "не важно")
     )
-
 
     @FXML
     fun initialize() {
@@ -116,6 +118,7 @@ class View {
     @FXML
     fun openNewWindow() {
         controller_add?.openNewWindow()
+
         controller?.refresh_data()
     }
     @FXML
@@ -135,6 +138,7 @@ class View {
         }
         controller?.refresh_data()
     }
+
     fun setTableParams(cur:Int,all:Int){
         page_text.text = cur.toString()
         page_all.text=all.toString()
@@ -164,7 +168,6 @@ class View {
             }
         }
     }
-
     fun refresh_filters(){
         filters[0]=Pair(FIO_text.text,"")
         filters[1] = Pair(Git_text.text, Git_list.value?.toString() ?: "Не важно")
@@ -172,7 +175,6 @@ class View {
         filters[3] = Pair(Phone_text.text, Phone_list.value?.toString() ?: "Не важно")
         filters[4] = Pair(Email_text.text, Email_list.value?.toString() ?: "Не важно")
     }
-
     fun initialize_actions(){
         button_prev.setOnAction {
             if(page_text.text.toInt()-1>=1){

@@ -43,7 +43,7 @@ public class Student_add_controller{
             val root: Parent = loader.load()
             val newStage = Stage()
             newStage.initModality(Modality.APPLICATION_MODAL)
-            newStage.title = "window1"
+            newStage.title = "new"
             newStage.scene = Scene(root)
             newStage.showAndWait()
         } catch (e: Exception) {
@@ -63,7 +63,7 @@ public class Student_add_controller{
         string+=firstname_text_add.text+" "
         string+=lastname_text_add.text+" "
         string+=surname_text_add.text+" "
-        println(string)
+        //println(string)
         if(git_text_add.text!=""){
             string+="git="+git_text_add.text+" "
         }

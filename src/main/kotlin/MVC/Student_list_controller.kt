@@ -16,7 +16,6 @@ import kotlin.math.ceil
 
 public class Student_list_controller{
 
-
     private val rowsPerPage = 15
     public var curPage=1
     public var allPages=1
@@ -29,6 +28,7 @@ public class Student_list_controller{
         this.view = view
     }
     public fun refresh_data(){
+        this.student_list=Student_list("database")
         allPages=ceil(student_list!!.get_count().toDouble()/15.0).toInt()
         view?.setTableParams(curPage,allPages)
         view?.filters

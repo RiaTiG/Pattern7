@@ -11,9 +11,13 @@ import javafx.scene.control.Button
 import javafx.scene.control.TextField
 import javafx.stage.Modality
 import javafx.stage.Stage
+
 public class Student_delete_controller {
+
     var student_list = Student_list("database")
+
     fun delete_student(id:Int) {
         student_list.delete_student(id)
+
     }
 }

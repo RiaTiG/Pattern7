@@ -100,7 +100,7 @@ class Student_list_DB private constructor():Student_list_interface {
         else
             insert+=",git=NULL"
         insert+=" where id=$id;\n"
-        println(insert)
+        //println(insert)
         statement.executeUpdate(insert)
 
     }
@@ -118,7 +118,7 @@ class Student_list_DB private constructor():Student_list_interface {
         }
         return count
     }
-    override fun get_k_n_student_short_list(k:Int,n:Int,filters:MutableList<Pair<String,String>>):Data_list_student_short { {
+    override fun get_k_n_student_short_list(k:Int,n:Int,filters:MutableList<Pair<String,String>>):Data_list_student_short {
         val list= mutableListOf<Student_short>()
         val statement: Statement = connection.createStatement()
         val result = statement.executeQuery("SELECT * FROM student ORDER BY id ASC LIMIT ${n} OFFSET ${(k-1)*n};")
@@ -133,7 +133,6 @@ class Student_list_DB private constructor():Student_list_interface {
                         list_args.add(result.getString(i))
                 }
                 student_string+=list_args.get(1)+" "+list_args.get(2)+" "+list_args.get(3)+" "
-                println(student_string)
                 if(list_args.get(4)!=null)
                     student_string+="telegram="+list_args.get(4)+" "
                 if(list_args.get(5)!=null)

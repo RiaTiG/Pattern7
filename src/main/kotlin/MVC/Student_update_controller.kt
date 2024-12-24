@@ -1,5 +1,5 @@
-
 package MVC
+
 import Data_list_student_short
 import MVC.View
 import Student
@@ -55,7 +55,7 @@ public class Student_update_controller {
             newController.tg_text_add.isEditable=false
             val newStage = Stage()
             newStage.initModality(Modality.APPLICATION_MODAL)
-            newStage.title = "Новое окно"
+            newStage.title = "new"
             newStage.scene = Scene(root)
             newStage.showAndWait()
         } catch (e: Exception) {
