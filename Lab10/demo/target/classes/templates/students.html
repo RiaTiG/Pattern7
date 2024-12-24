@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список студентов</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        tbody tr:hover {
+            background-color: #ff0000;
+        }
+        .selected {
+            background-color: #1042cf;
+        }
+        div {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+        }
+        .filter-container input {
+            margin: 0 5px;
+            padding: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>Список студентов</h1>
+
+<!-- Блок фильтрации -->
+<div class="filter-container">
+    <label for="filterName">Имя:</label>
+    <input type="text" id="filterName" onkeyup="filterTable()" placeholder="Фильтр по имени">
+    <label for="filterGit">Git:</label>
+    <input type="text" id="filterGit" onkeyup="filterTable()" placeholder="Фильтр по Git">
+    <label for="filterContact">Контакт:</label>
+    <input type="text" id="filterContact" onkeyup="filterTable()" placeholder="Фильтр по контакту">
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)">ID</th>
+        <th onclick="sortTable(1)">ФИО</th>
+        <th onclick="sortTable(2)">Git</th>
+        <th onclick="sortTable(3)">Контакт</th>
+    </tr>
+    </thead>
+    <tbody id="studentTable">
+    <tr onclick="toggleRowSelection(this)" th:each="student : ${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.fullname}"></td>
+        <td th:text="${student.git}"></td>
+        <td th:text="${student.contact}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:href="@{/students(page=${currentPage - 1})}" th:if="${currentPage > 0}">← Пред.</a>
+    Страница <span th:text="${currentPage + 1}"></span> из <span th:text="${totalPages}"></span>
+    <a th:href="@{/students(page=${currentPage + 1})}" th:if="${currentPage < totalPages - 1}">След. →</a>
+</div>
+<div>
+    <button id="addBtn" onclick="showModal('add')">Добавить</button>
+    <button id="editBtn" class="disabled" onclick="showModal('edit')">Изменить</button>
+    <button id="deleteBtn" class="disabled" onclick="deleteStudent()">Удалить</button>
+</div>
+
+<script>
+    function filterTable() {
+        const nameFilter = document.getElementById("filterName").value.toLowerCase();
+        const gitFilter = document.getElementById("filterGit").value.toLowerCase();
+        const contactFilter = document.getElementById("filterContact").value.toLowerCase();
+        const table = document.getElementById("studentTable");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            if (cells.length > 0) {
+                const nameValue = cells[1].textContent.toLowerCase();
+                const gitValue = cells[2].textContent.toLowerCase();
+                const contactValue = cells[3].textContent.toLowerCase();
+
+                if (
+                    nameValue.includes(nameFilter) &&
+                    gitValue.includes(gitFilter) &&
+                    contactValue.includes(contactFilter)
+                ) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Сортировка таблицы
+    function sortTable(columnIndex) {
+        const table = document.getElementById("studentTable");
+        const rows = Array.from(table.querySelectorAll("tr"));
+        const sortedRows = rows.sort((a, b) => {
+            const aValue = a.getElementsByTagName("td")[columnIndex]?.textContent || "";
+            const bValue = b.getElementsByTagName("td")[columnIndex]?.textContent || "";
+
+            return aValue.localeCompare(bValue, undefined, { numeric: true });
+        });
+
+        sortedRows.forEach(row => table.appendChild(row));
+    }
+
+    // Выбор строки
+    function toggleRowSelection(row) {
+        const previouslySelected = document.querySelector(".selected");
+        if (previouslySelected) {
+            previouslySelected.classList.remove("selected");
+        }
+
+        if (previouslySelected !== row) {
+            row.classList.add("selected");
+            document.getElementById("editBtn").classList.remove("disabled");
+            document.getElementById("deleteBtn").classList.remove("disabled");
+        } else {
+            document.getElementById("editBtn").classList.add("disabled");
+            document.getElementById("deleteBtn").classList.add("disabled");
+        }
+    }
+
+    // Удаление студента
+    function deleteStudent() {
+        const selectedRow = document.querySelector(".selected");
+        if (!selectedRow) return;
+
+        selectedRow.remove();
+        document.getElementById("editBtn").classList.add("disabled");
+        document.getElementById("deleteBtn").classList.add("disabled");
+    }
+
+    // Функция для показа модального окна (пример)
+    function showModal(action) {
+        console.log("Открытие модального окна для: ", action);
+    }
+</script>
+</body>
+</html>
